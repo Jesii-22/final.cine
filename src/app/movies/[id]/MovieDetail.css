@@ -1,0 +1,122 @@
+/* Botón Volver a Home */
+.back-button {
+    background-color: #FFD700; /* Color amarillo */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #FFC107; /* Amarillo más oscuro */
+    transform: scale(1.1); /* Animación de aumento */
+  }
+  
+  /* Título de la película */
+  .movie-title {
+    font-size: 5rem; /* Hacerlo grande */
+    color: #FFD700; /* Amarillo */
+    font-weight: bolder;
+    margin-top: 20px;
+   
+  }
+  
+  /* Imagen principal */
+  .movie-poster {
+    width: 100%;
+    max-width: 500px;
+    margin-top: -100px;
+  }
+  
+  /* Duración y calificación a la derecha */
+  .movie-info {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: flex-end;
+
+  }
+  
+  .movie-duration {
+    text-align: right;
+  }
+  
+  .stars {
+    color: #FFD700; /* Amarillo */
+  }
+  
+  /* Géneros con borde y animación hover */
+  .movie-genres {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: flex-end;
+
+  }
+  
+  .genre-badge {
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid #FFD700;
+    border-radius: 20px;
+    background-color: #FFD700;
+    color: #000000;
+    
+  }
+  
+  
+  
+  /* Sinopsis */
+  .movie-synopsis {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .movie-synopsis h3 {
+    font-size: 1.5rem;
+    color: #FFD700;
+    font-weight: bold;
+  }
+  
+  .movie-synopsis p {
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  
+  /* Trailer */
+  .movie-trailer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .trailer-iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+  }
+  
+  /* Botón Reservar Ticket */
+  .reserve-button {
+    background-color: #FFD700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .reserve-button:hover {
+    background-color: #FFC107;
+    transform: scale(1.1);
+  }
+  
