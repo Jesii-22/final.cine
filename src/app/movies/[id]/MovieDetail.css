@@ -1,111 +1,111 @@
-/* Botón Volver a Home */
 .back-button {
-    background-color: #FFD700; /* Color amarillo */
+    background-color: #FFD700; 
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-  }
+    color: #000000;
+    text-align: right; 
+    margin-right: 20px; 
+}
   
-  .back-button:hover {
-    background-color: #FFC107; /* Amarillo más oscuro */
-    transform: scale(1.1); /* Animación de aumento */
-  }
+.back-button:hover {
+    background-color: #FFC107; 
+    transform: scale(1.1); 
+}
   
-  /* Título de la película */
-  .movie-title {
-    font-size: 5rem; /* Hacerlo grande */
-    color: #FFD700; /* Amarillo */
+.movie-title {
+    font-size: 6rem; 
+    color: #FFD700; 
     font-weight: bolder;
-    margin-top: 20px;
-   
-  }
+    text-align: center;
+    margin-top: 15px;
+}
   
-  /* Imagen principal */
-  .movie-poster {
+.movie-poster {
+    display: flex;
     width: 100%;
     max-width: 500px;
-    margin-top: -100px;
-  }
+    margin-top: -130px;
+    margin-left: 100px;
+    border-radius: 55px;
+    border-color: #FFC107;
+}
   
-  /* Duración y calificación a la derecha */
-  .movie-info {
+.movie-info {
+    padding-top: 10px;
     display: flex;
-    justify-content: flex-end;
+    margin-left: 640px;
     gap: 20px;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-content: space-around;
-    align-items: flex-end;
-
-  }
+    flex-wrap: nowrap;
+    text-align-last: left;
+}
   
-  .movie-duration {
+.movie-duration {
     text-align: right;
-  }
+}
   
-  .stars {
-    color: #FFD700; /* Amarillo */
-  }
+.stars {
+    color: #FFD700; 
+}
   
-  /* Géneros con borde y animación hover */
-  .movie-genres {
-    margin-top: 20px;
+.movie-genres {
+    margin-top: 25px;
     display: flex;
-    justify-content: flex-end;
-    gap: 30px;
     flex-wrap: wrap;
     align-content: space-around;
-    align-items: flex-end;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 20px;
+}
 
-  }
-  
-  .genre-badge {
+.genre-badge {
     padding: 5px 10px;
     margin: 5px;
     border: 2px solid #FFD700;
     border-radius: 20px;
     background-color: #FFD700;
     color: #000000;
-    
-  }
+}
   
+.movie-synopsis {
+    width: 750px;
+    margin-top: -600px;
+    text-align: justify;
+    text-align-last: left;
+    margin-left: 642px;
+}
   
-  
-  /* Sinopsis */
-  .movie-synopsis {
-    margin-top: 20px;
-    text-align: right;
-  }
-  
-  .movie-synopsis h3 {
+.movie-synopsis h3 {
     font-size: 1.5rem;
     color: #FFD700;
     font-weight: bold;
-  }
+}
   
-  .movie-synopsis p {
+.movie-synopsis p {
     font-size: 1.1rem;
     color: #fff;
-  }
+}
   
-  /* Trailer */
-  .movie-trailer {
-    margin-top: 20px;
+.movie-trailer {
+    margin-top: 30px;
     text-align: center;
-  }
+    padding-left: 620px;
+}
   
-  .trailer-iframe {
+.trailer-iframe {
     width: 100%;
     max-width: 800px;
     height: 450px;
-  }
+}
   
-  /* Botón Reservar Ticket */
-  .reserve-button {
+.reserve-button {
     background-color: #FFD700;
+    color: #000000;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -113,10 +113,59 @@
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s ease;
-  }
+}
   
-  .reserve-button:hover {
+.reserve-button:hover {
     background-color: #FFC107;
     transform: scale(1.1);
-  }
+}
   
+.botonticket {
+    align-items: center;
+    padding-top: 50px;
+    padding-left: 650px;
+    padding-bottom: 50px;
+}
+
+
+.cinema-selection {
+    margin-top: 25px;
+    margin-right: 40px; 
+    text-align: right;
+}
+
+.cinema-button {
+    background-color: #FFD700;
+    color: #000000;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.cinema-button:hover {
+    background-color: #FFC107;
+}
+
+.schedule-selection {
+    margin-top: 10px;
+}
+
+.schedule-button {
+    background-color: #FFD700;
+    color: #000000;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.schedule-button:hover {
+    background-color: #FFC107;
+}

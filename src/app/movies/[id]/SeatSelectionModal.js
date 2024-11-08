@@ -52,20 +52,8 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
       { asiento: "D10", disponible: true },
     ],
   ];
-
-  const [seats, setSeats] = useState([]);
+  const [seats, setSeats] = useState(simulatedSeats);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-
-  // Simula cargar la disponibilidad de asientos cuando se selecciona fecha y hora
-  useEffect(() => {
-    if (date && time) {
-      setSeats(simulatedSeats);
-    } else {
-      setSeats([]); // Oculta los asientos si no se ha seleccionado fecha y hora
-    }
-  }, [date, time]);
 
   const handleSeatClick = (rowIndex, colIndex) => {
     const seat = seats[rowIndex][colIndex];
@@ -77,68 +65,48 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
     );
   };
 
-  const handleConfirm = () => {
-    if (!date || !time) {
-      alert("Selecciona una fecha y un horario");
-      return;
-    }
-   
-    alert(`Compra confirmada:\nFecha: ${date}\nHora: ${time}\nAsientos: ${selectedSeats.join(", ")}`)
-    onClose();
-  };
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg max-w-lg w-full space-y-4">
-        <h2 className="text-2xl font-semibold mb-4">Selecciona tus asientos</h2>
-        
-        <div className="flex space-x-4">
-          <input
-            type="date"
-            className="border p-2 rounded w-full"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <input
-            type="time"
-            className="border p-2 rounded w-full"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </div>
+      <div className="bg-white p-6 rounded-lg max-w-lg w-full space-y-4 relative">
+        <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">✖</button>
 
-        {/* Mostrar asientos solo si se ha seleccionado fecha y hora */}
-        {date && time && (
-          <div className="grid grid-cols-10 gap-2 mt-4">
-            {seats.map((row, rowIndex) =>
-              row.map((seat, colIndex) => (
+        <h2 className="text-2xl font-semibold mb-4">Selecciona tus Asientos</h2>
+
+        <div className="flex flex-col items-center space-y-2 mt-4">
+          {seats.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex space-x-2">
+              {row.map((seat, colIndex) => (
                 <button
                   key={seat.asiento}
                   onClick={() => handleSeatClick(rowIndex, colIndex)}
                   className={`p-2 rounded ${
                     !seat.disponible
-                      ? "bg-gray-400"
+                      ? "bg-gray-400 cursor-not-allowed"
                       : selectedSeats.includes(seat.asiento)
-                      ? "bg-green-500"
-                      : "bg-blue-500"
+                      ? "bg-green-400"
+                      : "bg-yellow-500"
                   } text-white font-bold`}
                   disabled={!seat.disponible}
                 >
                   {seat.asiento}
                 </button>
-              ))
-            )}
-          </div>
-        )}
+              ))}
+            </div>
+          ))}
+        </div>
 
-        <button
-          onClick={handleConfirm}
-          className="bg-green-600 text-white px-4 py-2 rounded mt-4 w-full hover:bg-green-700"
-        >
-          Confirmar Compra
-        </button>
+        <div className="flex justify-between mt-4">
+          <div className="flex space-x-2">
+            <div className="w-4 h-4 bg-yellow-500"></div> <span>Libres</span>
+            <div className="w-4 h-4 bg-gray-400 rounded"></div> <span>Ocupados</span>
+            <div className="w-4 h-4 bg-green-400 rounded"></div> <span>Seleccionado</span>
+          </div>
+          <button onClick={onClose} className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+            Confirmar
+          </button>
+        </div>
       </div>
     </div>
   );

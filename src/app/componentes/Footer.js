@@ -10,13 +10,7 @@ export default function Footer() {
           <h3 className="text-xl font-bold mb-4">Explora</h3>
           <ul>
             <li>
-              <Link href="/" className="hover:text-yellow-500">Películas</Link>
-            </li>
-            <li>
               <Link href="/" className="hover:text-yellow-500">Cartelera</Link>
-            </li>
-            <li>
-              <Link href="/" className="hover:text-yellow-500">Próximos Estrenos</Link>
             </li>
             <li>
               <Link href="/" className="hover:text-yellow-500">Contacto</Link>

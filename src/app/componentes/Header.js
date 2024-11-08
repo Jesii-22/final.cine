@@ -14,12 +14,7 @@ export default function Header() {
           <h2 className="text-lg font-bold text-white hover:text-yellow-400 transition duration-300">TICKET FLICKS</h2>
         </div>
         <nav className="flex items-center gap-9 text-white">
-          <Link 
-            href={`/`} 
-            className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-          >
-            Películas
-          </Link>
+         
           <Link 
             href={`/`} 
             className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
