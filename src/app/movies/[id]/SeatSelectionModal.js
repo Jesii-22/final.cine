@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
-const SeatSelectionModal = ({ isOpen, onClose }) => {
+const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
   const simulatedSeats = [
     [
       { asiento: "A1", disponible: true },
@@ -52,8 +52,12 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
       { asiento: "D10", disponible: true },
     ],
   ];
+
   const [seats, setSeats] = useState(simulatedSeats);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedCinema, setSelectedCinema] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
 
   const handleSeatClick = (rowIndex, colIndex) => {
     const seat = seats[rowIndex][colIndex];
@@ -65,6 +69,15 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
     );
   };
 
+  const handleCinemaChange = (event) => setSelectedCinema(event.target.value);
+  const handleDateChange = (event) => setSelectedDate(event.target.value);
+  const handleTimeChange = (event) => setSelectedTime(event.target.value);
+
+  const handleConfirm = () => {
+    alert(`Confirmado: \nCine: ${selectedCinema} \nFecha: ${selectedDate} \nHora: ${selectedTime} \nAsientos: ${selectedSeats.join(', ')}`);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -72,8 +85,54 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
       <div className="bg-white p-6 rounded-lg max-w-lg w-full space-y-4 relative">
         <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">✖</button>
 
-        <h2 className="text-2xl font-semibold mb-4">Selecciona tus Asientos</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-black">Selecciona tus Asientos</h2>
 
+        {/* Selección de cine */}
+        <div className="mb-4">
+          <label htmlFor="cinema" className="block text-sm font-medium text-black">Selecciona el Cine</label>
+          <select
+            id="cinema"
+            value={selectedCinema}
+            onChange={handleCinemaChange}
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          >
+            <option value="">Elige un cine</option>
+            <option value="Showcase Haedo">Showcase Haedo</option>
+            <option value="Showcase Norcenter">Showcase Norcenter</option>
+          </select>
+        </div>
+
+        {/* Selección de fecha */}
+        <div className="mb-4">
+          <label htmlFor="date" className="block text-sm font-medium text-black">Selecciona la Fecha</label>
+          <input
+            type="date"
+            id="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          />
+        </div>
+
+        {/* Selección de hora */}
+        <div className="mb-4">
+          <label htmlFor="time" className="block text-sm font-medium text-black">Selecciona el Horario</label>
+          <select
+            id="time"
+            value={selectedTime}
+            onChange={handleTimeChange}
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          >
+            <option value="">Elige un horario</option>
+            <option value="13:45">13:45</option>
+            <option value="15:20">15:20</option>
+            <option value="17:00">17:00</option>
+            <option value="20:25">20:25</option>
+            <option value="22:45">22:45</option>
+          </select>
+        </div>
+
+        {/* Selección de asientos */}
         <div className="flex flex-col items-center space-y-2 mt-4">
           {seats.map((row, rowIndex) => (
             <div key={rowIndex} className="flex space-x-2">
@@ -97,15 +156,26 @@ const SeatSelectionModal = ({ isOpen, onClose }) => {
           ))}
         </div>
 
+        {/* Leyenda de asientos */}
         <div className="flex justify-between mt-4">
           <div className="flex space-x-2">
-            <div className="w-4 h-4 bg-yellow-500"></div> <span>Libres</span>
-            <div className="w-4 h-4 bg-gray-400 rounded"></div> <span>Ocupados</span>
-            <div className="w-4 h-4 bg-green-400 rounded"></div> <span>Seleccionado</span>
+            <div className="w-4 h-4 bg-yellow-500 text-gray-900"></div> <span>Libres</span>
+            <div className="w-4 h-4 bg-gray-400 text-gray-900 rounded"></div> <span>Ocupados</span>
+            <div className="w-4 h-4 bg-green-400 text-gray-900 rounded"></div> <span>Seleccionado</span>
           </div>
-          <button onClick={onClose} className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+          <button
+            onClick={handleConfirm}
+            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+            disabled={!selectedCinema || !selectedDate || !selectedTime || selectedSeats.length === 0}
+          >
             Confirmar
           </button>
+        </div>
+
+        {/* Información adicional sobre la película seleccionada */}
+        <div className="mt-4 text-center">
+          <h3 className="font-semibold text-lg">{selectedMovie}</h3>
+          <p>{selectedDate} - {selectedTime}</p>
         </div>
       </div>
     </div>

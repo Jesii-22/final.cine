@@ -6,7 +6,6 @@ import SeatSelectionModal from './SeatSelectionModal';
 import Link from 'next/link';
 import './MovieDetail.css';
 import Footer from '@/app/componentes/Footer';
-import Header from '@/app/componentes/Header';
 
 function MovieDetail({ params }) {
   const [movie, setMovie] = useState(null);
@@ -14,8 +13,8 @@ function MovieDetail({ params }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCinema, setSelectedCinema] = useState(null);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -50,11 +49,6 @@ function MovieDetail({ params }) {
     { name: 'Showcase Norcenter', schedules: ['11:00', '13:30', '16:00', '18:30', '21:00'] }
   ];
 
-  const handleCinemaSelect = (cinema) => {
-    setSelectedCinema(cinema);
-    setSelectedSchedule(null); 
-  };
-
   const handleScheduleSelect = (schedule) => {
     setSelectedSchedule(schedule);
     openModal(); 
@@ -82,28 +76,6 @@ function MovieDetail({ params }) {
           ))}
         </div>
 
-        {/* Cinema selection section */}
-        <div className="cinema-selection">
-          <h3>Selecciona tu cine:</h3>
-          {cinemaOptions.map((cinema) => (
-            <div key={cinema.name}>
-              <button onClick={() => handleCinemaSelect(cinema)} className="cinema-button">
-                {cinema.name}
-              </button>
-              {selectedCinema === cinema && (
-                <div className="schedule-selection">
-                  <p>Selecciona horario:</p>
-                  {cinema.schedules.map((schedule) => (
-                    <button key={schedule} onClick={() => handleScheduleSelect(schedule)} className="schedule-button">
-                      {schedule}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
@@ -126,7 +98,28 @@ function MovieDetail({ params }) {
           </div>
         )}
 
-        {isModalOpen && <SeatSelectionModal isOpen={isModalOpen} onClose={closeModal} />}
+      {/* Botón para comprar el ticket */}
+        <div className="flex justify-center items-center mt-8">
+          <button
+            className="ticket-button bg-yellow-500 text-black px-4 py-2 rounded transition-transform transform hover:scale-105 hover:bg-yellow-400 shadow-lg "
+            onClick={() => openModal()}
+          >
+            Comprar tu ticket
+          </button>
+        </div>
+
+
+        {/* Modal de selección de butacas */}
+        {isModalOpen && (
+          <SeatSelectionModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            selectedSchedule={selectedSchedule}
+            selectedDate={selectedDate}
+            setSelectedSchedule={setSelectedSchedule}
+            setSelectedDate={setSelectedDate}
+          />
+        )}
       </div>
       <Footer />
     </div>
