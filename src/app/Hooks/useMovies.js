@@ -24,14 +24,15 @@ const useMovies = (endpoint = "now_playing") => {
   };
 
   useEffect(() => {
-    let isMounted = true; // Flag para comprobar si el componente está montado
+    let isMounted = true; 
     if (isMounted) {
       fetchMovies();
     }
 
     return () => {
-      isMounted = false; // Al desmontar, evitamos actualizar el estado
+      isMounted = false; 
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint]);
 
   return { movies, loading, error };
