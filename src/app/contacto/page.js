@@ -1,3 +1,7 @@
+"user client"
+import Header from "../componentes/Header";
+import Footer from "../componentes/Footer";
+
 export default function ContactPage() {
     return (
       <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#181407] to-[#4A3F31] text-white">
