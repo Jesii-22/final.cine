@@ -22,8 +22,10 @@ export default function Home() {
       <Header />
       {featuredMovie && <MainFeaturedMovie movie={featuredMovie} />}
       {popularMovies && <MoviesCarousel movies={popularMovies} />}
-   
-      <MoviesGallery movies={movies} />  
+      
+      <section id="cartelera">
+        <MoviesGallery movies={movies} />  
+      </section>
       
       <Footer/> 
     </div>

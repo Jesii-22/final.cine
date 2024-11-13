@@ -14,25 +14,34 @@ export async function POST(req) {
       return NextResponse.json({ success: false, error: "Datos incompletos" }, { status: 400 });
     }
 
+    // Ajuste p/q coincidan con los nombres del esquema
     const newLead = new Lead({
-      name,
-      lastName,
-      email,
+      nombre: name,
+      apellido: lastName,
+      correo: email,
       cine: selectedCinema,
       fecha: selectedDate,
       hora: selectedTime,
       asientos: selectedSeats
     });
 
-    await newLead.save(); // Guardar documento en la base de datos
+    await newLead.save(); // Guardar documento en la base
 
-    return NextResponse.json({ success: true, data: newLead }, { status: 201 }); // Respuesta exitosa
+    return NextResponse.json({ success: true, data: newLead }, { status: 201 }); 
   } catch (error) {
-    console.error("Error al guardar la reserva en MongoDB:", error);
+    console.error("Error al guardar la reserva en MongoDB:", error.message); 
     return NextResponse.json({ success: false, error: "Error al guardar la reserva" }, { status: 500 });
   }
 }
 
+// Función GET para obtener todos los tickets
 export async function GET() {
-  return NextResponse.json({ message: 'Método no permitido, usa POST para crear una reserva' }, { status: 405 });
+  await dbConnect(); // Conexión a la base de datos
+  try {
+    const leads = await Lead.find({}); // Obtener todos los documentos en la colección Lead
+    return NextResponse.json({ success: true, leads }); 
+  } catch (error) {
+    console.error("Error al obtener los tickets:", error.message); 
+    return NextResponse.json({ success: false, error: "Error al obtener los tickets" }, { status: 500 });
+  }
 }

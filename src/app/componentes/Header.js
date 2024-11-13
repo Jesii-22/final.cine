@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <header className="flex items-center justify-between border-b border-[#30270D] px-10 py-3 bg-gradient-to-r from-[#181407] to-[#4A3F31] shadow-lg">
-       <div className="flex items-center gap-8">
+      <div className="flex items-center gap-8">
         <div className="flex items-center gap-4 text-[#FFFFFF]">
           <div className="size-4 text-yellow-400 hover:text-yellow-500 transition duration-300">
             <svg viewBox="0 0 48 48" fill="none">
@@ -14,15 +14,16 @@ export default function Header() {
           <h2 className="text-lg font-bold text-white hover:text-yellow-400 transition duration-300">TICKET FLICKS</h2>
         </div>
         <nav className="flex items-center gap-9 text-white">
-         
+          {/* Enlace de Cartelera que lleva a la sección con id "cartelera" */}
           <Link 
-            href={`/`} 
+            href="/#cartelera" 
             className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
           >
             Cartelera
           </Link>
+          {/* Enlace de Contacto que lleva a la página de contacto */}
           <Link 
-            href={`/`} 
+            href="/contacto" 
             className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
           >
             Contacto
