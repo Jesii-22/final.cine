@@ -1,5 +1,5 @@
-"use client";
 import Link from 'next/link';
+import { FaTicketAlt } from 'react-icons/fa';
 
 export default function Header() {
   return (
@@ -11,17 +11,24 @@ export default function Header() {
               <path d="M24 4C25.78 14.22 33.78 22.22 44 24C33.78 25.78 25.78 33.78 24 44C22.22 33.78 14.22 25.78 4 24C14.22 22.22 22.22 14.22 24 4Z" fill="currentColor"/>
             </svg>
           </div>
-          <h2 className="text-lg font-bold text-white hover:text-yellow-400 transition duration-300">TICKET FLICKS</h2>
+
+          <Link href="/">
+            <h2 className="text-lg font-bold text-white hover:text-yellow-400 transition duration-300 cursor-pointer">TICKET FLICKS</h2>
+          </Link>
+          <div className="size-4 text-yellow-400 hover:text-yellow-500 transition duration-300">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 4C25.78 14.22 33.78 22.22 44 24C33.78 25.78 25.78 33.78 24 44C22.22 33.78 14.22 25.78 4 24C14.22 22.22 22.22 14.22 24 4Z" fill="currentColor"/>
+            </svg>
+          </div>
         </div>
         <nav className="flex items-center gap-9 text-white">
-          {/* Enlace de Cartelera que lleva a la sección con id "cartelera" */}
           <Link 
             href="/#cartelera" 
             className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
           >
             Cartelera
           </Link>
-          {/* Enlace de Contacto que lleva a la página de contacto */}
+         
           <Link 
             href="/contacto" 
             className="hover:text-yellow-400 transition duration-300 transform hover:scale-110"
@@ -30,6 +37,14 @@ export default function Header() {
           </Link>
         </nav>
       </div>
+
+      {/* Icono de Ticket en la esquina superior derecha */}
+      <Link 
+        href="/admin" 
+        className="text-yellow-400 hover:text-yellow-500 transition duration-300 transform hover:scale-125"
+      >
+        <FaTicketAlt size={28} />
+      </Link>
     </header>
   );
 }
