@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { toPng } from 'html-to-image';
 
-// Importa tus componentes Header y Footer
 import Header from '../componentes/Header';
 import Footer from '../componentes/Footer';
 
@@ -78,7 +77,7 @@ export default function TicketsAdmin() {
                     >
                     Descargar QR
                   </button>
-                  {/* QR Code Canvas (oculto) */}
+                  {/* QR Code Canvas */}
                   <div style={{ display: 'none' }}>
                     <QRCodeCanvas
                       ref={qrRef}

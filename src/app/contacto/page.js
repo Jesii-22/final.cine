@@ -5,12 +5,12 @@ import Footer from "../componentes/Footer";
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#181407] to-[#4A3F31] text-white">
-      {/* Header en la parte superior */}
+    
       <Header />
 
-      {/* Contenido de la página centrado */}
+   
       <div className="flex flex-col items-center justify-center flex-grow p-6 space-y-6">
-        {/* Información de los cines */}
+    
         <div className="flex flex-col lg:flex-row items-center justify-between w-full space-y-6 lg:space-y-0 lg:space-x-6">
           {/* Sección Showcase Haedo */}
           <div className="lg:w-1/3 p-4 text-center">
@@ -72,7 +72,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Footer en la parte inferior */}
+   
       <Footer />
     </div>
   );

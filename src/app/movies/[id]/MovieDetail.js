@@ -6,6 +6,7 @@ import SeatSelectionModal from '@/app/componentes/SeatSelectionModal';
 import Link from 'next/link';
 import './MovieDetail.css';
 import Footer from '@/app/componentes/Footer';
+import Header from '@/app/componentes/Header';
 
 function MovieDetail({ movieId }) {
   const [movie, setMovie] = useState(null);
@@ -22,6 +23,7 @@ function MovieDetail({ movieId }) {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
+
     const fetchMovieDetails = async () => {
       const apiKey = "098839c0ee7f3effbf72bdd6b66deca4";
       try {
@@ -65,6 +67,7 @@ function MovieDetail({ movieId }) {
 
   return (
     <div className="movie-detail-container">
+      <div className='header-movie'><Header /> </div>
       <Link href="/" className="back-button">← Volver a Home</Link>
 
       <div className="movie-detail">
