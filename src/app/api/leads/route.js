@@ -1,57 +1,46 @@
-import { NextResponse } from "next/server";
-import dbConnect from "@/app/config/dbConnect";
-import Lead from "@/app/models/Lead";
+import { NextResponse } from 'next/server';
+import dbConnect from '@/app/config/dbConnect';
+import Lead from '@/app/models/Lead';
 
 export async function POST(req) {
   try {
-    console.log("eeeee");
     await dbConnect(); // Conexión a la base de datos
-
     const data = await req.json();
-    const {
-      name,
-      lastName,
-      email,
-      selectedCinema,
-      selectedDate,
-      selectedTime,
-      selectedSeats,
-    } = data;
 
     // Validación de datos
     if (
-      !name ||
-      !lastName ||
-      !email ||
-      !selectedCinema ||
-      !selectedDate ||
-      !selectedTime ||
-      !selectedSeats
+      !data.user.nombre ||
+      !data.user.apellido ||
+      !data.user.email ||
+      !data.cinema ||
+      !data.date ||
+      !data.time ||
+      !data.seats
     ) {
       return NextResponse.json(
-        { success: false, error: "Datos incompletos" },
+        { success: false, error: 'Datos incompletos' },
         { status: 400 }
       );
     }
 
     // Ajuste p/q coincidan con los nombres del esquema
     const newLead = new Lead({
-      nombre: name,
-      apellido: lastName,
-      correo: email,
-      cine: selectedCinema,
-      fecha: selectedDate,
-      hora: selectedTime,
-      asientos: selectedSeats,
+      nombre: data.user.nombre,
+      apellido: data.user.apellido,
+      correo: data.user.email,
+      cine: data.cinema,
+      fecha: data.date,
+      hora: data.time,
+      asientos: data.seats,
     });
 
     await newLead.save(); // Guardar documento en la base
 
     return NextResponse.json({ success: true, data: newLead }, { status: 201 });
   } catch (error) {
-    console.error("Error al guardar la reserva en MongoDB:", error.message);
+    console.error('Error al guardar la reserva en MongoDB:', error.message);
     return NextResponse.json(
-      { success: false, error: "Error al guardar la reserva" },
+      { success: false, error: 'Error al guardar la reserva' },
       { status: 500 }
     );
   }
@@ -64,9 +53,9 @@ export async function GET() {
     const leads = await Lead.find({}); // Obtener todos los documentos en la colección Lead
     return NextResponse.json({ success: true, leads });
   } catch (error) {
-    console.error("Error al obtener los tickets:", error.message);
+    console.error('Error al obtener los tickets:', error.message);
     return NextResponse.json(
-      { success: false, error: "Error al obtener los tickets" },
+      { success: false, error: 'Error al obtener los tickets' },
       { status: 500 }
     );
   }
