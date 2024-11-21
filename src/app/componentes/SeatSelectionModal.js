@@ -1,12 +1,10 @@
-'use client'; // Asegura que este componente se renderice del lado del cliente
+'use client'; 
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation'; // useRouter para el App Router
-
+import { useRouter } from 'next/navigation'; 
 const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
-  const router = useRouter(); // Manejo de navegación
-
+  const router = useRouter(); 
   const simulatedSeats = [
     [
       { asiento: "A1", disponible: true },
@@ -110,7 +108,7 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
     try {
       await axios.post('/api/leads', reservationData);
       onClose();
-      router.push('/admin'); // Redirigir a la página de administrador
+      router.push('/admin'); // página de administrador
     } catch (error) {
       console.error('Error al guardar los datos:', error);
       alert('Hubo un error al confirmar la compra.');

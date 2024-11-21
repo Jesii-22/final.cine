@@ -18,7 +18,7 @@ export default function MoviesCarousel({ movies }) {
         Películas Más Vistas
       </h2>
       <div className="relative overflow-hidden">
-        {/* Flecha izquierda */}
+       
         <button
           className="absolute left-0 top-1/2 transform -translate-y-1/2 h-8 w-8 z-10 px-2 bg-black bg-opacity-50 rounded-full"
           onClick={scrollLeft}
@@ -41,9 +41,9 @@ export default function MoviesCarousel({ movies }) {
               className="min-w-[220px] flex-shrink-0 group relative"
             >
               <Link href={`/movies/${movie.id}`}>
-                {/* Contenedor para el borde y el padding */}
+            
                 <div className="p-2 rounded-lg group-hover:ring-4 group-hover:ring-yellow-500 transition-all transform group-hover:scale-105">
-                  {/* Imagen de la película */}
+           
                   <div
                     className="w-full h-[400px] bg-cover bg-center rounded-lg"
                     style={{
@@ -51,7 +51,7 @@ export default function MoviesCarousel({ movies }) {
                     }}
                   ></div>
                 </div>
-                {/* Contenedor del título */}
+              
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
                   <p className="text-white font-bold text-xl text-center px-4 group-hover:text-yellow-500">
                     {movie.title}
@@ -61,7 +61,7 @@ export default function MoviesCarousel({ movies }) {
             </div>
           ))}
         </div>
-        {/* Flecha derecha */}
+       
         <button
           className="absolute right-0 top-1/2 transform -translate-y-1/2 h-8 w-8 z-10 px-2 bg-black bg-opacity-50 rounded-full"
           onClick={scrollRight}

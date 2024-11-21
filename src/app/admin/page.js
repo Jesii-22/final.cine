@@ -10,7 +10,7 @@ import Footer from '../componentes/Footer';
 
 export default function TicketsAdmin() {
   const [leads, setLeads] = useState([]);
-  const [selectedLead, setSelectedLead] = useState(null); // Ticket seleccionado para mostrar en el popup
+  const [selectedLead, setSelectedLead] = useState(null); 
   const qrRef = useRef(null);
 
   useEffect(() => {

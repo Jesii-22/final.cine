@@ -23,17 +23,17 @@ function MovieDetail({ movieId }) {
     selectedDate: '',
     selectedTime: '',
     selectedSeats: [],
-    movieTitle: '', // Añadido: Campo para el título de la película
+    movieTitle: '', 
   });
 
-  // Opciones de cines
+ 
   const cinemaOptions = [
     { name: 'Showcase Haedo', schedules: ['10:30', '13:00', '15:30', '18:00', '20:30'] },
     { name: 'Showcase Norcenter', schedules: ['11:00', '13:30', '16:00', '18:30', '21:00'] },
   ];
 
   const openModal = () => {
-    setFormData({ ...formData, movieTitle: movie.title }); // Agregamos el título de la película
+    setFormData({ ...formData, movieTitle: movie.title }); 
     setIsModalOpen(true);
   };
 
@@ -68,7 +68,7 @@ function MovieDetail({ movieId }) {
 
   const handleCompleteReservation = async () => {
     try {
-      // Aquí puedes enviar los datos de reserva al servidor
+   
       await axios.post('/api/leads', formData);
       alert(`Reserva completada para la película: ${formData.movieTitle}`);
       closeModal();
@@ -133,7 +133,6 @@ function MovieDetail({ movieId }) {
           </div>
         )}
 
-        {/* Botón para comprar el ticket */}
         <div className="flex justify-center items-center mt-8">
           <button
             className="ticket-button bg-yellow-500 text-black px-4 py-2 rounded transition-transform transform hover:scale-105 hover:bg-yellow-400 shadow-lg "
