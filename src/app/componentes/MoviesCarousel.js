@@ -18,8 +18,9 @@ export default function MoviesCarousel({ movies }) {
         Películas Más Vistas
       </h2>
       <div className="relative overflow-hidden">
+        {/* Flecha izquierda */}
         <button
-          className="absolute left-0 h-full z-10 px-2 bg-black bg-opacity-50"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 h-8 w-8 z-10 px-2 bg-black bg-opacity-50 rounded-full"
           onClick={scrollLeft}
         >
           {"<"}
@@ -60,8 +61,9 @@ export default function MoviesCarousel({ movies }) {
             </div>
           ))}
         </div>
+        {/* Flecha derecha */}
         <button
-          className="absolute right-0 h-full z-10 px-2 bg-black bg-opacity-50"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 h-8 w-8 z-10 px-2 bg-black bg-opacity-50 rounded-full"
           onClick={scrollRight}
         >
           {">"}
