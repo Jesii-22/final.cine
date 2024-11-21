@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
-const ReservaModal = ({ onClose, onComplete }) => {
+const ModalReserva = ({ onClose }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +15,8 @@ const ReservaModal = ({ onClose, onComplete }) => {
     selectedSeats: [],
   });
 
+  const router = useRouter();
+
   const handleNext = () => setStep(step + 1);
   const handlePrev = () => setStep(step - 1);
 
@@ -22,12 +25,12 @@ const ReservaModal = ({ onClose, onComplete }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleComplete = async () => {
+  const handleSubmit = async () => {
     try {
       await axios.post('/api/leads', formData);
-      onComplete();
+      router.push('/admin'); // Redirigir a la página de administración
     } catch (error) {
-      console.error('Error al guardar la reserva:', error);
+      console.error('Error al realizar la reserva:', error);
     }
   };
 
@@ -35,31 +38,70 @@ const ReservaModal = ({ onClose, onComplete }) => {
     <div className="modal">
       {step === 1 && (
         <div>
-          <h2 className="text-yellow-500">Paso 1: Información de usuario</h2>
-          <input type="text" name="name" placeholder="Nombre" onChange={handleChange} />
-          <input type="text" name="lastName" placeholder="Apellido" onChange={handleChange} />
-          <input type="email" name="email" placeholder="Correo" onChange={handleChange} />
-          <button onClick={handleNext} className="button-next">Siguiente</button>
+          <h2>Información Personal</h2>
+          <input
+            type="text"
+            name="name"
+            placeholder="Nombre"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Apellido"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Correo Electrónico"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <button onClick={handleNext}>Siguiente</button>
         </div>
       )}
       {step === 2 && (
         <div>
-          <h2 className="text-yellow-500">Paso 2: Selección de cine y horario</h2>
-          
-          <button onClick={handlePrev} className="button-back">Volver</button>
-          <button onClick={handleNext} className="button-next">Siguiente</button>
+          <h2>Seleccionar Cine y Horario</h2>
+          <select
+            name="selectedCinema"
+            value={formData.selectedCinema}
+            onChange={handleChange}
+          >
+            <option value="">Seleccionar Cine</option>
+            <option value="Showcase Haedo">Showcase Haedo</option>
+            <option value="Showcase Norcenter">Showcase Norcenter</option>
+          </select>
+          <input
+            type="date"
+            name="selectedDate"
+            value={formData.selectedDate}
+            onChange={handleChange}
+          />
+          <input
+            type="time"
+            name="selectedTime"
+            value={formData.selectedTime}
+            onChange={handleChange}
+          />
+          <button onClick={handlePrev}>Volver</button>
+          <button onClick={handleNext}>Siguiente</button>
         </div>
       )}
       {step === 3 && (
         <div>
-          <h2 className="text-yellow-500">Paso 3: Confirmación de compra</h2>
-          <button onClick={handlePrev} className="button-back">Volver</button>
-          <button onClick={handleComplete} className="button-confirm">Confirmar Compra</button>
+          <h2>Seleccionar Asientos</h2>
+          {/* Aquí puedes implementar la lógica para seleccionar asientos */}
+          <button onClick={handlePrev}>Volver</button>
+          <button onClick={handleSubmit}>Confirmar Reserva</button>
         </div>
       )}
-      <button onClick={onClose} className="button-close">Cerrar</button>
+      <button onClick={onClose}>Cerrar</button>
     </div>
   );
 };
 
-export default ReservaModal;
+export default ModalReserva;

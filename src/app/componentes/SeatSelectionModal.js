@@ -1,9 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+'use client'; // Asegura que este componente se renderice del lado del cliente
+
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useRouter } from 'next/navigation'; // useRouter para el App Router
 
 const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
+  const router = useRouter(); // Manejo de navegación
+
   const simulatedSeats = [
     [
       { asiento: "A1", disponible: true },
@@ -55,7 +58,6 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
     ],
   ];
 
- 
   const [currentStep, setCurrentStep] = useState(1);
   const [seats, setSeats] = useState(simulatedSeats);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -107,8 +109,8 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
 
     try {
       await axios.post('/api/leads', reservationData);
-      alert('Compra confirmada y datos guardados en MongoDB');
       onClose();
+      router.push('/admin'); // Redirigir a la página de administrador
     } catch (error) {
       console.error('Error al guardar los datos:', error);
       alert('Hubo un error al confirmar la compra.');
@@ -120,9 +122,10 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg max-w-lg w-full space-y-4 relative">
-        <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">✖</button>
+        <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">
+          ✖
+        </button>
 
-        {/* Paso 1: Información del usuario */}
         {currentStep === 1 && (
           <div>
             <h2 className="text-2xl font-semibold mb-4 text-yellow-500">Paso 1: Datos del Usuario</h2>
@@ -160,7 +163,6 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
           </div>
         )}
 
-        {/* Paso 2: Selección de cine, fecha, hora y asientos */}
         {currentStep === 2 && (
           <div>
             <h2 className="text-2xl font-semibold mb-4 text-yellow-500">Paso 2: Selección de Cine y Asientos</h2>
@@ -180,22 +182,7 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
               <option value="22:00">22:00</option>
               <option value="23:45">23:45</option>
             </select>
-            
-            {/* Referencias de colores para los asientos */}
-            <div className="mt-4 flex justify-between text-black">
-              <span className="flex items-center">
-                <div className="w-4 h-4 bg-green-400 rounded-full mr-2"></div> Seleccionado
-              </span>
-              <span className="flex items-center">
-                <div className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div> Disponible
-              </span>
-              <span className="flex items-center">
-                <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div> Ocupado
-              </span>
-            </div>
-
             <div className="mt-4 space-y-2">
-              {/* Asientos con mayor separación */}
               {seats.map((row, rowIndex) => (
                 <div key={rowIndex} className="flex space-x-2">
                   {row.map((seat, colIndex) => (
@@ -203,8 +190,11 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
                       key={seat.asiento}
                       onClick={() => handleSeatClick(rowIndex, colIndex)}
                       className={`p-2 rounded ${
-                        !seat.disponible ? "bg-gray-400 cursor-not-allowed" :
-                        selectedSeats.includes(seat.asiento) ? "bg-green-400" : "bg-yellow-500"
+                        !seat.disponible
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : selectedSeats.includes(seat.asiento)
+                          ? 'bg-green-400'
+                          : 'bg-yellow-500'
                       } text-white font-bold`}
                       disabled={!seat.disponible}
                     >
@@ -215,7 +205,9 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
               ))}
             </div>
             <div className="flex justify-between mt-4">
-              <button onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">Atrás</button>
+              <button onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
+                Atrás
+              </button>
               <button
                 onClick={handleNextStep}
                 disabled={!selectedCinema || !selectedDate || !selectedTime || selectedSeats.length === 0}
@@ -227,19 +219,39 @@ const SeatSelectionModal = ({ isOpen, onClose, selectedMovie }) => {
           </div>
         )}
 
-        {/* Paso 3: Confirmación de Compra */}
         {currentStep === 3 && (
           <div>
-            <h2 className="text-2xl font-semibold mb-4 text-yellow-500">Paso 3: Confirmación de Compra</h2>
-            <p className="text-black"><strong>Nombre:</strong> {userInfo.nombre} {userInfo.apellido}</p>
-            <p className="text-black"><strong>Email:</strong> {userInfo.email}</p>
-            <p className="text-black"><strong>Cine:</strong> {selectedCinema}</p>
-            <p className="text-black"><strong>Fecha:</strong> {selectedDate}</p>
-            <p className="text-black"><strong>Hora:</strong> {selectedTime}</p>
-            <p className="text-black"><strong>Asientos:</strong> {selectedSeats.join(', ')}</p>
+            <h2 className="text-2xl font-semibold mb-4 text-yellow-500">Paso 3: Confirmación</h2>
+            <ul className="list-disc list-inside text-gray-700 mb-4">
+              <li>
+                <strong>Nombre:</strong> {userInfo.nombre} {userInfo.apellido}
+              </li>
+              <li>
+                <strong>Email:</strong> {userInfo.email}
+              </li>
+              <li>
+                <strong>Cine:</strong> {selectedCinema}
+              </li>
+              <li>
+                <strong>Fecha:</strong> {selectedDate}
+              </li>
+              <li>
+                <strong>Horario:</strong> {selectedTime}
+              </li>
+              <li>
+                <strong>Asientos Seleccionados:</strong> {selectedSeats.join(', ')}
+              </li>
+            </ul>
             <div className="flex justify-between mt-4">
-              <button onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">Atrás</button>
-              <button onClick={handleConfirmPurchase} className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200">Confirmar Compra</button>
+              <button onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
+                Atrás
+              </button>
+              <button
+                onClick={handleConfirmPurchase}
+                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200"
+              >
+                Confirmar y Comprar
+              </button>
             </div>
           </div>
         )}

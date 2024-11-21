@@ -58,7 +58,7 @@ export default function TicketsAdmin() {
                 <th className="py-3 px-4">Apellido</th>
                 <th className="py-3 px-4">Mail</th>
                 <th className="py-3 px-4">Cine</th>
-                <th className="py-3 px-4">Película</th>
+                {/* <th className="py-3 px-4">Película</th> */}
                 <th className="py-3 px-4">Fecha</th>
                 <th className="py-3 px-4">Horario</th>
                 <th className="py-3 px-4">QR Tickets</th>
@@ -71,7 +71,7 @@ export default function TicketsAdmin() {
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.apellido}</td>
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.correo}</td>
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.cine}</td>
-                  <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.pelicula}</td>
+                  {/* <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.pelicula}</td> */}
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">{new Date(lead.fecha).toLocaleDateString()}</td>
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">{lead.hora}</td>
                   <td className="py-3 px-4 border-b border-[#ffffff1a]">
@@ -103,13 +103,13 @@ export default function TicketsAdmin() {
             <h2 className="text-xl font-bold text-center mb-4">Información del Ticket</h2>
             <p><strong>Nombre:</strong> {selectedLead.nombre} {selectedLead.apellido}</p>
             <p><strong>Cine:</strong> {selectedLead.cine}</p>
-            <p><strong>Película:</strong> {selectedLead.pelicula}</p>
+            {/* <p><strong>Película:</strong> {selectedLead.pelicula}</p> */}
             <p><strong>Fecha:</strong> {new Date(selectedLead.fecha).toLocaleDateString()}</p>
             <p><strong>Horario:</strong> {selectedLead.hora}</p>
             <div className="flex justify-center my-4">
               <div ref={qrRef} className="p-4 bg-white rounded-lg shadow-md">
               <QRCode
-                value={`Ticket para ${selectedLead.nombre || 'N/A'} ${selectedLead.apellido || 'N/A'}\nCine: ${selectedLead.cine || 'N/A'}\nPelícula: ${selectedLead.pelicula || 'N/A'}\nFecha: ${
+                value={`Ticket para ${selectedLead.nombre || 'N/A'} ${selectedLead.apellido || 'N/A'}\nCine: ${selectedLead.cine || 'N/A'}\nFecha: ${
                   selectedLead.fecha ? new Date(selectedLead.fecha).toLocaleDateString() : 'N/A'
                 }\nHora: ${selectedLead.hora || 'N/A'}`}
               />

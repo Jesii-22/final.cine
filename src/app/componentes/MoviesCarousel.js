@@ -30,21 +30,32 @@ export default function MoviesCarousel({ movies }) {
           style={{
             WebkitOverflowScrolling: "touch",
             overflowX: "scroll",
-            scrollbarWidth: "none",  
-            msOverflowStyle: "none", 
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
           }}
-          onScroll={(e) => e.preventDefault()} 
         >
           {movies.map((movie) => (
-            <div key={movie.id} className="min-w-[200px] flex-shrink-0">
-              <Link href={`/movies/${movie.id}`} className="group">
-                <div
-                  className="w-full aspect-video bg-cover bg-center rounded"
-                  style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
-                  }}
-                ></div>
-                <p className="text-center mt-2 font-medium">{movie.title}</p>
+            <div
+              key={movie.id}
+              className="min-w-[220px] flex-shrink-0 group relative"
+            >
+              <Link href={`/movies/${movie.id}`}>
+                {/* Contenedor para el borde y el padding */}
+                <div className="p-2 rounded-lg group-hover:ring-4 group-hover:ring-yellow-500 transition-all transform group-hover:scale-105">
+                  {/* Imagen de la película */}
+                  <div
+                    className="w-full h-[400px] bg-cover bg-center rounded-lg"
+                    style={{
+                      backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
+                    }}
+                  ></div>
+                </div>
+                {/* Contenedor del título */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+                  <p className="text-white font-bold text-xl text-center px-4 group-hover:text-yellow-500">
+                    {movie.title}
+                  </p>
+                </div>
               </Link>
             </div>
           ))}
